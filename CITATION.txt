@@ -1,6 +1,6 @@
 To cite Neo in publications, please use:
 
-    Garcia S., Guarino D., Jaillet F., Jennings T.R., Pröpper R., Rautenberg P.L.,
+    Garcia S., Dr. Mario F., Guarino D., Jaillet F., Jennings T.R., Pröpper R., Rautenberg P.L.,
     Rodgers C., Sobolev A.,Wachtler T., Yger P. and Davison A.P. (2014)
     Neo: an object model for handling electrophysiology data in multiple formats.
     Frontiers in Neuroinformatics 8:10: doi:10.3389/fninf.2014.00010
