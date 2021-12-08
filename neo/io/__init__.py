@@ -19,6 +19,7 @@ Classes:
 * :attr:`AsciiSignalIO`
 * :attr:`AsciiSpikeTrainIO`
 * :attr:`AxographIO`
+* :attr:`AxonaIO`
 * :attr:`AxonIO`
 * :attr:`BCI2000IO`
 * :attr:`BlackrockIO`
@@ -27,12 +28,14 @@ Classes:
 * :attr:`BrainwareDamIO`
 * :attr:`BrainwareF32IO`
 * :attr:`BrainwareSrcIO`
+* :attr:`CedIO`
 * :attr:`ElanIO`
 * :attr:`IgorIO`
 * :attr:`IntanIO`
 * :attr:`MEArecIO`
 * :attr:`KlustaKwikIO`
 * :attr:`KwikIO`
+* :attr:`MaxwellIO`
 * :attr:`MicromedIO`
 * :attr:`NeoMatlabIO`
 * :attr:`NestIO`
@@ -41,14 +44,16 @@ Classes:
 * :attr:`NeuroScopeIO`
 * :attr:`NeuroshareIO`
 * :attr:`NixIO`
-* :attr:`NSDFIO`
+* :attr:`NWBIO`
 * :attr:`OpenEphysIO`
+* :attr:`OpenEphysBinaryIO`
 * :attr:`PhyIO`
 * :attr:`PickleIO`
 * :attr:`PlexonIO`
 * :attr:`RawBinarySignalIO`
 * :attr:`RawMCSIO`
 * :attr:`Spike2IO`
+* :attr:`SpikeGadgetsIO`
 * :attr:`SpikeGLXIO`
 * :attr:`StimfitIO`
 * :attr:`TdtIO`
@@ -74,6 +79,10 @@ Classes:
     .. autoattribute:: extensions
 
 .. autoclass:: neo.io.AxographIO
+
+    .. autoattribute:: extensions
+
+.. autoclass:: neo.io.AxonaIO
 
     .. autoattribute:: extensions
 
@@ -109,6 +118,10 @@ Classes:
 
     .. autoattribute:: extensions
 
+.. autoclass:: neo.io.CedIO
+
+    .. autoattribute:: extensions
+
 .. autoclass:: neo.io.ElanIO
 
     .. autoattribute:: extensions
@@ -134,6 +147,10 @@ Classes:
     .. autoattribute:: extensions
 
 .. autoclass:: neo.io.MEArecIO
+
+    .. autoattribute:: extensions
+
+.. autoclass:: neo.io.MaxwellIO
 
     .. autoattribute:: extensions
 
@@ -169,11 +186,15 @@ Classes:
 
     .. autoattribute:: extensions
 
-.. autoclass:: neo.io.NSDFIO
+.. autoclass:: neo.io.NWBIO
 
     .. autoattribute:: extensions
 
 .. autoclass:: neo.io.OpenEphysIO
+
+    .. autoattribute:: extensions
+
+.. autoclass:: neo.io.OpenEphysBinaryIO
 
     .. autoattribute:: extensions
 
@@ -198,6 +219,10 @@ Classes:
     .. autoattribute:: extensions
 
 .. autoclass:: Spike2IO
+
+    .. autoattribute:: extensions
+
+.. autoclass:: SpikeGadgetsIO
 
     .. autoattribute:: extensions
 
@@ -250,6 +275,7 @@ from neo.io.asciiimageio import AsciiImageIO
 from neo.io.asciisignalio import AsciiSignalIO
 from neo.io.asciispiketrainio import AsciiSpikeTrainIO
 from neo.io.axographio import AxographIO
+from neo.io.axonaio import AxonaIO
 from neo.io.axonio import AxonIO
 from neo.io.blackrockio import BlackrockIO
 from neo.io.blkio import BlkIO
@@ -258,14 +284,16 @@ from neo.io.brainvisionio import BrainVisionIO
 from neo.io.brainwaredamio import BrainwareDamIO
 from neo.io.brainwaref32io import BrainwareF32IO
 from neo.io.brainwaresrcio import BrainwareSrcIO
+from neo.io.cedio import CedIO
 from neo.io.elanio import ElanIO
-# from neo.io.elphyio import ElphyIO
+from neo.io.elphyio import ElphyIO
 from neo.io.exampleio import ExampleIO
 from neo.io.igorproio import IgorIO
 from neo.io.intanio import IntanIO
 from neo.io.klustakwikio import KlustaKwikIO
 from neo.io.kwikio import KwikIO
 from neo.io.mearecio import MEArecIO
+from neo.io.maxwellio import MaxwellIO
 from neo.io.micromedio import MicromedIO
 from neo.io.neomatlabio import NeoMatlabIO
 from neo.io.nestio import NestIO
@@ -274,14 +302,16 @@ from neo.io.neuroexplorerio import NeuroExplorerIO
 from neo.io.neuroscopeio import NeuroScopeIO
 from neo.io.nixio import NixIO
 from neo.io.nixio_fr import NixIO as NixIOFr
-from neo.io.nsdfio import NSDFIO
+from neo.io.nwbio import NWBIO
 from neo.io.openephysio import OpenEphysIO
+from neo.io.openephysbinaryio import OpenEphysBinaryIO
 from neo.io.phyio import PhyIO
 from neo.io.pickleio import PickleIO
 from neo.io.plexonio import PlexonIO
 from neo.io.rawbinarysignalio import RawBinarySignalIO
 from neo.io.rawmcsio import RawMCSIO
 from neo.io.spike2io import Spike2IO
+from neo.io.spikegadgetsio import SpikeGadgetsIO
 from neo.io.spikeglxio import SpikeGLXIO
 from neo.io.stimfitio import StimfitIO
 from neo.io.tdtio import TdtIO
@@ -295,6 +325,7 @@ iolist = [
     AsciiSignalIO,
     AsciiSpikeTrainIO,
     AxographIO,
+    AxonaIO,
     AxonIO,
     BCI2000IO,
     BlackrockIO,
@@ -303,6 +334,7 @@ iolist = [
     BrainwareDamIO,
     BrainwareF32IO,
     BrainwareSrcIO,
+    CedIO,
     ElanIO,
     # ElphyIO,
     ExampleIO,
@@ -311,6 +343,7 @@ iolist = [
     KlustaKwikIO,
     KwikIO,
     MEArecIO,
+    MaxwellIO,
     MicromedIO,
     NixIO,  # place NixIO before other IOs that use HDF5 to make it the default for .h5 files
     NeoMatlabIO,
@@ -319,14 +352,16 @@ iolist = [
     NeuroExplorerIO,
     NeuroScopeIO,
     NeuroshareIO,
-    NSDFIO,
+    NWBIO,
     OpenEphysIO,
+    OpenEphysBinaryIO,
     PhyIO,
     PickleIO,
     PlexonIO,
     RawBinarySignalIO,
     RawMCSIO,
     Spike2IO,
+    SpikeGadgetsIO,
     SpikeGLXIO,
     StimfitIO,
     TdtIO,

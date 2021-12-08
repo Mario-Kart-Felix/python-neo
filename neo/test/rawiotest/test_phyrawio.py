@@ -20,34 +20,37 @@ import sys
 
 class TestPhyRawIO(BaseTestRawIO, unittest.TestCase):
     rawioclass = PhyRawIO
-    files_to_download = [
-        'phy_example_0/spike_times.npy',
-        'phy_example_0/spike_templates.npy',
-        'phy_example_0/spike_clusters.npy',
-        'phy_example_0/params.py',
-        'phy_example_0/cluster_KSLabel.tsv',
-        'phy_example_0/cluster_ContamPct.tsv',
-        'phy_example_0/cluster_Amplitude.tsv',
-        'phy_example_0/cluster_group.tsv',
+    entities_to_download = [
+        'phy'
     ]
-    entities_to_test = ['phy_example_0']
+    entities_to_test = [
+        'phy/phy_example_0'
+    ]
 
     def test_csv_tsv_parser_with_csv(self):
         csv_tempfile = Path(tempfile.gettempdir()).joinpath('test.csv')
         with open(csv_tempfile, 'w') as csv_file:
             csv_writer = csv.writer(csv_file, delimiter=',')
-            csv_writer.writerow(['Header 1', 'Header 2'])
-            csv_writer.writerow(['Value 1', 'Value 2'])
+            csv_writer.writerow(['cluster_id', 'some_annotation'])
+            csv_writer.writerow([1, 'Good'])
+            csv_writer.writerow([2, 10])
+            csv_writer.writerow([3, 1.23])
 
         # the parser in PhyRawIO runs csv.DictReader to parse the file
         # csv.DictReader for python version 3.6+ returns list of OrderedDict
         if (3, 6) <= sys.version_info < (3, 8):
-            target = [OrderedDict({'Header 1': 'Value 1',
-                                   'Header 2': 'Value 2'})]
+            target = [OrderedDict({'cluster_id': 1,
+                                   'some_annotation': 'Good'}),
+                      OrderedDict({'cluster_id': 2,
+                                   'some_annotation': 10}),
+                      OrderedDict({'cluster_id': 3,
+                                   'some_annotation': 1.23})]
 
         # csv.DictReader for python version 3.8+ returns list of dict
         elif sys.version_info >= (3, 8):
-            target = [{'Header 1': 'Value 1', 'Header 2': 'Value 2'}]
+            target = [{'cluster_id': 1, 'some_annotation': 'Good'},
+                      {'cluster_id': 2, 'some_annotation': 10},
+                      {'cluster_id': 3, 'some_annotation': 1.23}]
 
         list_of_dict = PhyRawIO._parse_tsv_or_csv_to_list_of_dict(csv_tempfile)
 
@@ -57,18 +60,26 @@ class TestPhyRawIO(BaseTestRawIO, unittest.TestCase):
         tsv_tempfile = Path(tempfile.gettempdir()).joinpath('test.tsv')
         with open(tsv_tempfile, 'w') as tsv_file:
             tsv_writer = csv.writer(tsv_file, delimiter='\t')
-            tsv_writer.writerow(['Header 1', 'Header 2'])
-            tsv_writer.writerow(['Value 1', 'Value 2'])
+            tsv_writer.writerow(['cluster_id', 'some_annotation'])
+            tsv_writer.writerow([1, 'Good'])
+            tsv_writer.writerow([2, 10])
+            tsv_writer.writerow([3, 1.23])
 
         # the parser in PhyRawIO runs csv.DictReader to parse the file
         # csv.DictReader for python version 3.6+ returns list of OrderedDict
         if (3, 6) <= sys.version_info < (3, 8):
-            target = [OrderedDict({'Header 1': 'Value 1',
-                                   'Header 2': 'Value 2'})]
+            target = [OrderedDict({'cluster_id': 1,
+                                   'some_annotation': 'Good'}),
+                      OrderedDict({'cluster_id': 2,
+                                   'some_annotation': 10}),
+                      OrderedDict({'cluster_id': 3,
+                                   'some_annotation': 1.23})]
 
         # csv.DictReader for python version 3.8+ returns list of dict
         elif sys.version_info >= (3, 8):
-            target = [{'Header 1': 'Value 1', 'Header 2': 'Value 2'}]
+            target = [{'cluster_id': 1, 'some_annotation': 'Good'},
+                      {'cluster_id': 2, 'some_annotation': 10},
+                      {'cluster_id': 3, 'some_annotation': 1.23}]
 
         list_of_dict = PhyRawIO._parse_tsv_or_csv_to_list_of_dict(tsv_tempfile)
 
